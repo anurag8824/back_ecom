@@ -53,7 +53,7 @@ const EmailRegister = async (req,res) =>{
     .json({msg:"Email sent sucessfully !"})
   } catch (error) {
     console.log(error)
-    res.status(202).json({msg:"Error in sending Email !"})
+    res.status(202).json({msg:"Error in sending Email !",user})
 
   }
 
