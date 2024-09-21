@@ -6,7 +6,8 @@ return crypto.randomInt(1000,10000)
 }
 const option={
     path:"/",
-    // httpOnly:true,
+    secure:true,
+    ssameSite: "strict"
     credentials:true
 
 }
