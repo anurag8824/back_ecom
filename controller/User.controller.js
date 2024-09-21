@@ -17,7 +17,6 @@ const EmailRegister = async (req,res) =>{
     const user = await userModel.findOne({Email:Email})
     console.log(user)
     if(user){
-    //   return res.json({message:"user already exist!"})
     const otp = genrateOtp();
     console.log(otp)
 
@@ -50,7 +49,7 @@ const EmailRegister = async (req,res) =>{
     res
     .status(200)
     .cookie("Email",Email,option)
-    .json({msg:"Email sent sucessfully !"})
+    .json({msg:"Email sent sucessfully !",user})
   } catch (error) {
     console.log(error)
     res.status(202).json({msg:"Error in sending Email !",user})
