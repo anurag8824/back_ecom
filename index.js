@@ -12,7 +12,7 @@ connection();
 app.use(express.json({limit:"16kb"}))
 app.use(cookieParser())
 app.use(cors({
-    origin:"https://test-ecom-ten.vercel.app",
+    origin:["https://test-ecom-ten.vercel.app", "http://localhost:3000"], 
     credentials:true
 }));
 
