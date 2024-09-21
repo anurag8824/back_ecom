@@ -7,7 +7,8 @@ return crypto.randomInt(1000,10000)
 const option = {
     path: "/",
     secure: true,       // Ensure the cookie is only sent over HTTPS
-    httpOnly: true,     // The cookie will not be accessible via JavaScript
+    httpOnly: true, 
+    sameSite:"Lax"         // The cookie will not be accessible via JavaScript
     
 };
 const EmailRegister = async (req,res) =>{
