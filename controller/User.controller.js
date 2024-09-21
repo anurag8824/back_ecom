@@ -8,7 +8,7 @@ const option = {
     path: "/",
     secure: true,       // Ensure the cookie is only sent over HTTPS
     httpOnly: true, 
-    sameSite:"Lax"         // The cookie will not be accessible via JavaScript
+    sameSite:"None"         // The cookie will not be accessible via JavaScript
     
 };
 const EmailRegister = async (req,res) =>{
