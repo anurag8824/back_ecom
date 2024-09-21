@@ -102,6 +102,19 @@ const ResndOtp = async (req,res)=>{
     
 }
 
+const UserCheck = async(req,res)=>{
+const Email = req.cookies.Email;
+  const user = await userModel.findOne({Email});
+    if(!user){
+        return res.json({msg:"user not exist !"})
+    }
+    if(user.verifed == false){
+       res.json({msg:"Email not verifed !"})
+    }
+    else{
+        res.json({msg:"Email verifed !"})
+    }
+}
 
 
-export default {EmailRegister,OtpVerfiy,UserData,ResndOtp}
+export default {EmailRegister,OtpVerfiy,UserData,ResndOtp,UserCheck}
