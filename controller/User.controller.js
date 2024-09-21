@@ -67,17 +67,17 @@ const OtpVerfiy = async(req,res)=>{
     const user = await userModel.findOne({Email:Email});
     console.log(user);
     if(!user){
-       return res.json("Email Doesn't match",user,Email);
+       return res.json({msg:"Email Doesn't match",user,Email});
 
     }
     if(user.Otp == Otp){
         user.verifed = true;
         await user.save();
-        res.status(200).json("Sucessfully Otp Match")
+        res.status(200).json({msg:"Sucessfully Otp Match"})
         
     }
     else{
-        res.json("Otp Doesn't Match")
+        res.json({msg:"Otp Doesn't Match"})
     }
 
 }
