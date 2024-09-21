@@ -8,7 +8,7 @@ const option={
     path:"/",
     secure:true,
     httpOnly:true,
-    sameSite: "strict"
+    sameSite: "strict",
     credentials:true
 
 }
