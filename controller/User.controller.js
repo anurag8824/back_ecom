@@ -4,15 +4,12 @@ import crypto from "crypto";
 const genrateOtp = ()=>{
 return crypto.randomInt(1000,10000)
 }
-const option={
-    path:"/",
-    secure:true,
-    httpOnly:true,
-    sameSite: "strict",
-    credentials:true
-
-}
-
+const option = {
+    path: "/",
+    secure: true,       // Ensure the cookie is only sent over HTTPS
+    httpOnly: true,     // The cookie will not be accessible via JavaScript
+    sameSite: "Strict" 
+};
 const EmailRegister = async (req,res) =>{
     const Email = req.body.Email;
     console.log(Email);
