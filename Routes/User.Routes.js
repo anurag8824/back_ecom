@@ -7,6 +7,7 @@ router.post("/EmailRegister",User.EmailRegister)
 router.post("/Otpverfiy",User.OtpVerfiy)
 router.post("/register/finish",User.UserData)
 // router.post("resend",User.resendOtp)
+router.get("/me",User.UserCheck)
 
 
 

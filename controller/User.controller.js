@@ -4,20 +4,19 @@ import crypto from "crypto";
 const genrateOtp = ()=>{
 return crypto.randomInt(1000,10000)
 }
-const option={
-    path:"/",
-    httpOnly:true,
-    Credentials:true
-
-}
-
+const option = {
+    path: "/",
+    secure: true,       // Ensure the cookie is only sent over HTTPS
+    httpOnly: true, 
+    sameSite:"None"         // The cookie will not be accessible via JavaScript
+    
+};
 const EmailRegister = async (req,res) =>{
     const Email = req.body.Email;
     console.log(Email);
     const user = await userModel.findOne({Email:Email})
     console.log(user)
     if(user){
-    //   return res.json({message:"user already exist!"})
     const otp = genrateOtp();
     console.log(otp)
 
@@ -50,7 +49,7 @@ const EmailRegister = async (req,res) =>{
     res
     .status(200)
     .cookie("Email",Email,option)
-    .json({msg:"Email sent sucessfully !"})
+    .json({msg:"Email sent sucessfully !",user})
   } catch (error) {
     console.log(error)
     res.status(202).json({msg:"Error in sending Email !",user})
@@ -68,17 +67,17 @@ const OtpVerfiy = async(req,res)=>{
     const user = await userModel.findOne({Email:Email});
     console.log(user);
     if(!user){
-       return res.json("Email Doesn't match");
+       return res.json({msg:"Email Doesn't match",user,Email});
 
     }
     if(user.Otp == Otp){
         user.verifed = true;
         await user.save();
-        res.status(200).json("Sucessfully Otp Match")
+        res.status(200).json({msg:"Sucessfully Otp Match"})
         
     }
     else{
-        res.json("Otp Doesn't Match")
+        res.json({msg:"Otp Doesn't Match"})
     }
 
 }
@@ -103,6 +102,19 @@ const ResndOtp = async (req,res)=>{
     
 }
 
+const UserCheck = async(req,res)=>{
+const Email = req.cookies.Email;
+  const user = await userModel.findOne({Email});
+    if(!user){
+        return res.json({msg:"user not exist !"})
+    }
+    if(user.verifed == false){
+       res.json({msg:"Email not verifed !"})
+    }
+    else{
+        res.json({msg:"Email verifed !"})
+    }
+}
 
 
-export default {EmailRegister,OtpVerfiy,UserData,ResndOtp}
+export default {EmailRegister,OtpVerfiy,UserData,ResndOtp,UserCheck}
