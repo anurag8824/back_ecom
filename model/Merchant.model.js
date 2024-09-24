@@ -15,3 +15,5 @@ const merchant = new mongoose.Schema({
 
 
 const MerchantData = mongoose.model("merchantdetail",merchant)
+
+export default MerchantData;

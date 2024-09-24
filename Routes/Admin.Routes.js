@@ -8,3 +8,7 @@ router.post("/register",Admin.RegisterAdmin);
 router.post("/register/otpverify",Admin.OtpVerfiy);
 router.post("/login",Admin.AdminLogin);
 router.post("/login/verfiyotp",Admin.LoginOtpverify);
+router.post("/adddeals",Admin.Addproduct)
+// router.get("/alldeals",Admin.AllDeals);
+
+export default router;

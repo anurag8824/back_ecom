@@ -1,5 +1,6 @@
 import EmailVerfication from "../middlewares/Emailverfication.js";
 import userModel from "../model/user.model.js";
+import Product from "../model/Productlist.model.js";
 import crypto from "crypto";
 const genrateOtp = ()=>{
 return crypto.randomInt(1000,10000)
@@ -8,7 +9,8 @@ const option = {
     path: "/",
     secure: true,       // Ensure the cookie is only sent over HTTPS
     httpOnly: true, 
-    sameSite:"None"         // The cookie will not be accessible via JavaScript
+    sameSite:"None"
+   
     
 };
 const EmailRegister = async (req,res) =>{
@@ -117,4 +119,73 @@ const Email = req.cookies.Email;
 }
 
 
-export default {EmailRegister,OtpVerfiy,UserData,ResndOtp,UserCheck}
+const OrderClick = async (req,res)=>{
+    try {
+        const UserId = req.cookies.Email;
+        console.log(req.cookies);
+        console.log("Use",UserId)
+        const AppId = "app"+crypto.randomInt(1000000,100001000000);
+        console.log("P",AppId);
+        await myproduct.create({
+            AppId:AppId,
+            UserId:UserId,
+            Product_id:req.body.Product_id
+    
+        })
+    console.log(req.body,AppId)
+        res.json({msg:AppId})
+    } catch (error) {
+      res.json(error);
+    }
+  }
+  
+  
+  const Myproduct = async(req,res)=>{
+       try {
+          const {OrderId,TrackingCompnay,TrackingId,Otp,FourDigit,Invoice,AppId} = req.body
+          const Product = await myproduct.findOne({AppId});
+          if(!Product){
+             res.json({msg:"AppId is Doesn't Exist !"})
+          }
+          else{
+             Product.OrderId=OrderId
+             Product.TrackingCompnay=TrackingCompnay
+             Product.TrackingId=TrackingId
+             Product.Otp=Otp
+             Product.FourDigit=FourDigit
+             Product.Invoice=Invoice
+     
+             await Product.save();
+             res.json({msg:"order sucessfully Placed !"})
+     
+     
+          }
+       } catch (error) {
+          res.json(error);
+       }
+  }
+   const Deals = async(req,res)=>{
+    const Deals =await Product.find({})
+    if(Deals.length >0){
+        res.json({Deal:Deals.length,Deals})
+    }
+    else{
+        res.json({msg:"0 Deals is live !"})
+    }
+   }
+
+   const SingleDeal = async(req,res) => {
+    const id = req.params.id;
+    console.log(id);
+    const deal = await Product.findById(id);
+    if(deal){
+        res.json({Deal:deal})
+
+    }
+    else{
+        res.json({msg:"no deal found"});
+    }
+
+   }
+  
+  export default {EmailRegister,OtpVerfiy,UserData,ResndOtp,OrderClick,Myproduct,Deals,UserCheck,SingleDeal}

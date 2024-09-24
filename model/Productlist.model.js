@@ -22,8 +22,17 @@ const ProductList = new mongoose.Schema({
     Link:{
         type:String
     },
+    OfferAmmount:{
+        type:String,
+    },
+    CardType:{
+        type:String,
+    },
+    DealNumber:{
+        type:String,
+    }
   
-})
+},{timestamps:true})
 
 
 const Product = mongoose.model("product",ProductList);

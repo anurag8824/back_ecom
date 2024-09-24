@@ -3,7 +3,7 @@ import crypto from "crypto";
 import AdminData from "../model/Admin.model.js";
 import Product from "../model/Productlist.model.js";
 import MerchantData from "../model/Merchant.model.js"
-
+import myproduct from "../model/Myproduct.js";
 const genrateOtp = ()=>{
 return crypto.randomInt(1000,10000)
 }
@@ -108,12 +108,15 @@ const Addproduct = async(req,res)=>{
    try {
      await Product.create({
          DealTitle:req.body.DealTitle,
-         YaperPrice:req.body.YaperPrice,
+         Price:req.body.Price,
          Offer:req.body.Offer,
          Store:req.body.Store,
          Variant:req.body.Variant,
          Image:req.body.Image,
-         Link:req.body.Link
+         Link:req.body.Link,
+         OfferAmmount:req.body.OfferAmmount,
+         CardType:req.body.CardType,
+         DealNumber:req.body.DealNumber
      })
      res.json("Product List Sucessfully !")
  
@@ -156,5 +159,26 @@ const AddMerchant = async(req,res)=>{
     }
 }
 
+const AllDeals = async(req,res)=>{
+    const Products = await myproduct.find({});
+    if(Products.length>0){
+    const UpdatePrdocts = await Promise.all(
+        Products.map(async(product)=>{
+            const ProductDetails = await Product.findById(product.Product_id)
+            return{
+                ...Products._doc,
+                ProductDetails:ProductDetails
+            }
+        })
+    )
 
-export default{AdminLogin,RegisterAdmin,OtpVerfiy,LoginOtpverify,Addproduct,AllMerchant,AddMerchant}
+    res.json(UpdatePrdocts)
+}
+else{
+    res.json({msg:"0 Deal Closes !"});
+}
+
+}
+
+
+export default{AdminLogin,RegisterAdmin,OtpVerfiy,LoginOtpverify,Addproduct,AllMerchant,AddMerchant,AllDeals}
