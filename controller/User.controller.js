@@ -139,7 +139,7 @@ const OrderClick = async (req, res) => {
 
     // Uncomment and modify this section when database integration is needed
     await myproduct.create({
-        AppId: AppId,
+        Appid: AppId,
         UserId: Email,
         Product_id: req.body.Product_id
     });
