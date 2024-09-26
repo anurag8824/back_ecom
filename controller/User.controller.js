@@ -122,14 +122,14 @@ const Email = req.cookies.Email;
 
 const OrderClick = async (req,res)=>{
     try {
-        const UserId = req.cookies.Email;
+       const Email = req.cookies.Email;
         console.log(req.cookies);
         console.log("Use",UserId)
         const AppId = "app"+crypto.randomInt(1000000,100001000000);
         console.log("P",AppId);
         await myproduct.create({
             AppId:AppId,
-            UserId:UserId,
+            UserId:Email,
             Product_id:req.body.Product_id
     
         })
