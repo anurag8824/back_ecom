@@ -9,7 +9,7 @@ const option = {
     path: "/",
     secure: true,       // Ensure the cookie is only sent over HTTPS
     httpOnly: true, 
-    sameSite:"None"
+    sameSite:"Lax"
    
     
 };
