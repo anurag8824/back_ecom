@@ -8,8 +8,8 @@ return crypto.randomInt(1000,10000)
 const option = {
     path: "/",
     secure: true,       // Ensure the cookie is only sent over HTTPS
-    httpOnly: true, 
-    sameSite:"Lax"
+    // httpOnly: true, 
+    sameSite:"None"
    
     
 };
