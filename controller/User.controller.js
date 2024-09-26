@@ -137,11 +137,11 @@ const OrderClick = async (req, res) => {
     console.log("Generated AppId:", AppId);
 
     // Uncomment and modify this section when database integration is needed
-    // await myproduct.create({
-    //     AppId: AppId,
-    //     UserId: Email,
-    //     Product_id: req.body.Product_id
-    // });
+    await myproduct.create({
+        AppId: AppId,
+        UserId: Email,
+        Product_id: req.body.Product_id
+    });
 
     console.log(req.body, AppId);
     res.json({ "msg": AppId ,Email });
