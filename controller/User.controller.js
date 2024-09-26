@@ -127,12 +127,12 @@ const OrderClick = async (req,res)=>{
         console.log("Use",UserId)
         const AppId = "app"+crypto.randomInt(1000000,100001000000);
         console.log("P",AppId);
-        await myproduct.create({
-            AppId:AppId,
-            UserId:Email,
-            Product_id:req.body.Product_id
+        // await myproduct.create({
+        //     AppId:AppId,
+        //     UserId:Email,
+        //     Product_id:req.body.Product_id
     
-        })
+        // })
     console.log(req.body,AppId)
         res.json({msg:AppId})
     } catch (error) {
