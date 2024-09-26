@@ -116,7 +116,8 @@ const Addproduct = async(req,res)=>{
          Link:req.body.Link,
          OfferAmmount:req.body.OfferAmmount,
          CardType:req.body.CardType,
-         DealNumber:req.body.DealNumber
+         DealNumber:req.body.DealNumber,
+         offerCash:req.body.offerCash
      })
      res.json("Product List Sucessfully !")
  
