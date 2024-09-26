@@ -120,26 +120,37 @@ const Email = req.cookies.Email;
 }
 
 
-const OrderClick = async (req,res)=>{
-    try {
-       const Email = req.cookies.Email;
-        console.log(req.cookies);
-        console.log("Use",UserId)
-        // const AppId = "app"+crypto.randomInt(1000000,100001000000);
-        const AppId = "app" + crypto.randomInt(1000000, 10000000);
-        console.log("P",AppId);
-        // await myproduct.create({
-        //     AppId:AppId,
-        //     UserId:Email,
-        //     Product_id:req.body.Product_id
-    
-        // })
-    console.log(req.body,AppId)
-        res.json({"msg":AppId})
-    } catch (error) {
-      res.json(error);
+const OrderClick = async (req, res) => {
+  try {
+    const Email = req.cookies.Email;
+
+    // Check if the Email cookie exists
+    if (!Email) {
+      return res.status(400).json({ error: 'Email cookie not found' });
     }
+
+    console.log(req.cookies);
+    console.log("User", Email);
+
+    // Generate a random AppId
+    const AppId = "app" + crypto.randomInt(1000000, 10000000);
+    console.log("Generated AppId:", AppId);
+
+    // Uncomment and modify this section when database integration is needed
+    // await myproduct.create({
+    //     AppId: AppId,
+    //     UserId: Email,
+    //     Product_id: req.body.Product_id
+    // });
+
+    console.log(req.body, AppId);
+    res.json({ "msg": 12345 });
+  } catch (error) {
+    console.error("Error in OrderClick:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
+};
+
   
   
   const Myproduct = async(req,res)=>{
