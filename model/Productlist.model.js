@@ -30,6 +30,9 @@ const ProductList = new mongoose.Schema({
     },
     DealNumber:{
         type:String,
+    },
+    offerCash:{
+    type:String,
     }
   
 },{timestamps:true})
