@@ -114,7 +114,7 @@ const Email = req.cookies.Email;
        res.json({msg:"Email not verifed !"})
     }
     else{
-        res.json({msg:"Email verifed !"})
+        res.json({msg:"Email verifed !",user})
     }
 }
 
