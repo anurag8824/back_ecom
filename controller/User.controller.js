@@ -1,6 +1,7 @@
 import EmailVerfication from "../middlewares/Emailverfication.js";
 import userModel from "../model/user.model.js";
 import Product from "../model/Productlist.model.js";
+import myproduct from "../model/Myproduct.js";
 import crypto from "crypto";
 const genrateOtp = ()=>{
 return crypto.randomInt(1000,10000)
