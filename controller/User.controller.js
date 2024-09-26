@@ -15,6 +15,7 @@ const option = {
 };
 const EmailRegister = async (req,res) =>{
     const Email = req.body.Email;
+    
     console.log(Email);
     const user = await userModel.findOne({Email:Email})
     console.log(user)
@@ -114,7 +115,7 @@ const Email = req.cookies.Email;
        res.json({msg:"Email not verifed !"})
     }
     else{
-        res.json({msg:"Email verifed !",user})
+        res.json({msg:"Email verifed !",user,Email})
     }
 }
 
