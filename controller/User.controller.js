@@ -144,7 +144,7 @@ const OrderClick = async (req, res) => {
     // });
 
     console.log(req.body, AppId);
-    res.json({ "msg": 12345 });
+    res.json({ "msg": 12345 ,Email });
   } catch (error) {
     console.error("Error in OrderClick:", error);
     res.status(500).json({ error: 'Internal Server Error' });
